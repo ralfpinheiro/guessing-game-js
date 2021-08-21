@@ -2,6 +2,7 @@
 
 let secretNumber = Math.trunc(Math.random() * 20 + 1);
 let score = 20;
+let highScore = 0;
 
 document.querySelector('.check').addEventListener('click', function () {
   const guess = Number(document.querySelector('.guess').value);
@@ -9,13 +10,19 @@ document.querySelector('.check').addEventListener('click', function () {
   if (!guess) {
     document.querySelector('.message').textContent = '🚫 Please Enter a Number';
     document.querySelector('.guess').style.borderColor = 'red';
-    // Whene player wins
+    // When player wins
   } else if (guess === secretNumber) {
     document.querySelector('.message').textContent = '🎉 Correct number!';
     document.querySelector('.number').textContent = secretNumber;
     document.querySelector('body').style.backgroundColor = 'green';
     document.querySelector('.number').style.width = '30rem';
-    // Whene guess is too high
+
+    if (score > highScore) {
+      highScore = score;
+      document.querySelector('.highscore').textContent = highScore;
+    }
+
+    // When guess is too high
   } else if (guess > secretNumber) {
     if (score > 1) {
       document.querySelector('.message').textContent = '📉 Too high!';
